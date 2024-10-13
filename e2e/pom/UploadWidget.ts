@@ -6,7 +6,6 @@ import * as path from 'path';
  * POM to handle the use of the Upload Widget
  */
 export class UploadWidget {
-    // public uploadButton: Locator;
     public uploadButton: Button;
     public uwIframe: FrameLocator;
     public browseButton: Locator;
