@@ -1,11 +1,13 @@
 import { Locator, FrameLocator } from '@playwright/test';
+import { Button } from "../compenets/Button";
 import * as path from 'path';
 
 /**
  * POM to handle the use of the Upload Widget
  */
 export class UploadWidget {
-    public uploadButton: Locator;
+    // public uploadButton: Locator;
+    public uploadButton: Button;
     public uwIframe: FrameLocator;
     public browseButton: Locator;
     public fileUploadInput: Locator;
@@ -13,8 +15,7 @@ export class UploadWidget {
     public publicIdInput: Locator;
     public uploadPresetInput: Locator;
     public assetMenu: Locator;
-    public openButton: Locator;
-    public newAsset: Locator;
+    public openButton: Button;
 
     constructor(page) {
         this.uploadButton = page.locator('//*[@data-test="upload-btn"]');
@@ -29,27 +30,23 @@ export class UploadWidget {
     }
 
     /* open the Upload Widget */
-    async OpenUploadWidget(): Promise<void> {
+    public async openUploadWidget(): Promise<void> {
         await this.uploadButton.click();
         await this.browseButton.waitFor();
     }
 
     /* set the public id of the uploaded asset */
-    async SetPublicId(publicId: string): Promise<void> {
+    public async setPublicId(publicId: string): Promise<void> {
         await this.advancedButton.click();
         await this.uploadPresetInput.waitFor();
         await this.publicIdInput.fill(publicId);
     }
 
     /* select the file and upload it to the test account */
-    async UploadImageAsset(): Promise<void> {
+    public async uploadImageAsset(): Promise<void> {
         // select a file located in local storage
         const filePath = path.join('/Users/erezbaris/dev/qe-workshop/e2e/files-for-upload/cld-sample-5.jpg');
         const fileInput = this.fileUploadInput;
         await fileInput.setInputFiles(filePath);
-    }
-
-    async ValidateFileUploaded(): Promise<void> {
-        await this.uwIframe.locator('//div[@data-test="show-completed-button"]').waitFor();
     }
 }
