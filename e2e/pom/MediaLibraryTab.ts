@@ -9,8 +9,4 @@ export class MediaLibraryTab {
     constructor(page) {
         this.assetTab = page.locator('//*[@data-test="tab-mediaLibraryAssets"]');
     }
-
-    async goToMLAssetTab(url: string): Promise<void> {
-        console.log('test');
-    }
 }

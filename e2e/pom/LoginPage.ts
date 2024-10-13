@@ -16,9 +16,19 @@ export class LoginPage {
         this.loginButton = page.locator('//button[@id="sign-in"]');
     }
 
-    async enterUserDetails(username: string, password: string): Promise<void> {
+    public async enterUserDetails(username: string, password: string): Promise<void> {
         await this.userNameInput.fill(username);
         await this.userPasswordInput.fill(password);
         await this.loginButton.click();
+    }
+
+    public isValidEmail(email: string): boolean {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    public isValidPassword(password: string): boolean {
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        return passwordRegex.test(password);
     }
 }
